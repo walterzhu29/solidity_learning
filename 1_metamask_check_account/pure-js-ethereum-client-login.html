@@ -16,8 +16,8 @@
 
     <div class="container-fluid mt-3">
         <h5> Account: <span class="showAccount" id="accountsSpan"></span></h5>
-        <h5> Account: <span class="showAccount" id="networkSpan"></span></h5>
-        <h5> Account: <span class="showAccount" id="chainIdSpan"></span></h5>
+        <h5> Network: <span class="showAccount" id="networkSpan"></span></h5>
+        <h5> ChainId: <span class="showAccount" id="chainIdSpan"></span></h5>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -34,7 +34,6 @@
 
          const getAccount = async () => {
             try {
-                // const accounts = await ethereum.request({method: 'eth_requestAccounts'});
                 const accounts = await ethereum.request({method: 'eth_requestAccounts'});
                 accountsSpan.innerHTML = accounts;
             } catch (error) {
