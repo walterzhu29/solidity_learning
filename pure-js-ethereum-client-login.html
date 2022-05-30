@@ -18,6 +18,10 @@
         <h5> Account: <span class="showAccount" id="accountsSpan"></span></h5>
         <h5> Network: <span class="showAccount" id="networkSpan"></span></h5>
         <h5> ChainId: <span class="showAccount" id="chainIdSpan"></span></h5>
+
+        <button class="btn btn-primary" id="getAccountButton"> Get Account Button</button>
+        <p><span id="getAccountButtonResult"></span></p>
+        <button class="btn btn-primary" id="sendButton"> Send </button>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -51,6 +55,34 @@
 
             }
          }
+
+         getAccountButton.onclick = async () => {
+            try {
+                const accounts = await ethereum.request({method: 'eth_accounts'});
+                getAccountButtonResult.innerHTML = accounts;
+            } catch (error) {
+                console.error(error);
+            }
+         }
+
+        sendButton.onclick = async () => {
+            try {
+                const accounts = await ethereum.request({method: 'eth_accounts'});
+                const txHash = await ethereum.request({
+                    method: 'eth_sendTransaction',
+                    params: [{
+                        from: accounts[0],
+                        to: 'xxx',
+                        value: '0x29a2241af62c0000',
+                        // gas: '0x2710',
+                        // gasPrice: '0x09184e72a000'
+                    }],
+                });
+                console.log(txHash);
+            } catch (error) {
+                console.error(error);
+            }
+        }
 
         const checkMetaMaskClient = async ()=> {
             if(isMetaMaskInstalled()) {
